@@ -1,0 +1,17 @@
+body {
+  background-color: rgb(203, 210, 123);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+nav a {
+    padding: 0 1rem;
+}
