@@ -5,13 +5,40 @@ body {
 }
 
 nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding-top: 2rem;
-    margin-bottom: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 2rem;
+  margin-bottom: 3rem;
 }
 
 nav a {
-    padding: 0 1rem;
+  padding: 0 1rem;
+}
+ul {
+  margin-left: 20vw;
+  margin-right: 20vw;
+}
+ul li {
+  text-align: justify;
+  text-transform: capitalize;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+ol li {
+  font-size: 0.8em;
+  text-align: justify;
+  text-transform: capitalize;
+  margin: 0;
+}
+img {
+  border-radius: 10px;
+  width: 30vw;
+}
+
+.banner {
+  border: 1px solid #666;
+  background-color: rgb(180, 153, 206);
+  padding: 1rem 0 2rem;
+  margin: 2rem;
 }
