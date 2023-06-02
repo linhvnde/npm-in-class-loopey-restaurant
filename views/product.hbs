@@ -2,12 +2,24 @@
 <h1>{{title}}</h1>
 <ul>
     {{#if price}}
-    <li>Price: {{price}}€</li>
+        <li>Price: {{price}}€</li>
     {{else}}
-    <li>Price: upon request</li>
+        <li>Price: upon request</li>
     {{/if}}
 
-    <li>Recommended Drink: {{recommendedDrink}} </li>
+    {{#if isVeggie}}
+        <li>Veggie: Yes </li>
+    {{else}}
+        <li>Veggie: No </li>
+    {{/if}}
+       
+    {{#if recommendedDrink}}
+        <li>Recommended Drink: {{recommendedDrink}} </li>
+    {{else}}
+        <li>Recommended Drink: go as you want</li>
+    {{/if}}
+
+
     <li>Ingredients: there are {{ingredients.length}} ingredients
         <ol>
             {{#each ingredients}}

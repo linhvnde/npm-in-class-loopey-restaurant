@@ -1,5 +1,7 @@
 const express = require("express"); //require the package so that we can use it
 const hbs = require("hbs");
+const mongoose = require("mongoose");
+const Pizza = require("./models/Pizza.model");
 
 const app = express(); //the function that will run express and because express is the framework, everything has to run within the framework which is the app
 
@@ -11,6 +13,14 @@ app.use(express.static("public")); //we will expose the content of the folder na
 app.set("views", __dirname + "/views"); //tells our Express app where to look for our views
 app.set("view engine", "hbs"); //sets HBS as the template engine
 hbs.registerPartials(__dirname + "/views/partials"); //tell HBS which directory we use for partials
+
+//CONNECT to DB
+mongoose
+  .connect("mongodb://127.0.0.1/loopeyRestaurant")
+  .then((x) => {
+    console.log(`Connected! Database name: "${x.connections[0].name}"`);
+  })
+  .catch((e) => console.log("error connecting to DB", e));
 
 //GET /
 app.get("/", function (request, response, next) {
@@ -45,6 +55,9 @@ app.get("/pizzas/margarita", (req, res, next) => {
   //res.sendFile("path of the file");
   // res.send("page for margarita");
   //res.render("subdirectory/nameOfTemplateNoExtension",infoWeWantToPassForTheRender)//showing the template, render the template
+
+  //dont need the hard code
+  /*
   const dataMargarita = {
     title: "Pizza Margarita",
     price: 12,
@@ -52,33 +65,38 @@ app.get("/pizzas/margarita", (req, res, next) => {
     imageFile: "pizza-margarita.jpg",
     ingredients: ["mozzarella", "tomato sauce", "basilicum"],
   };
-  res.render("product", dataMargarita);
+  */
+  Pizza.findOne({ title: "margarita" })
+    .then((pizzaDetailsFromDB) => {
+      res.render("product", pizzaDetailsFromDB);
+    })
+    .catch((err) => {
+      console.log("Cannot connect to DB", err);
+    });
 });
 //GET/pizzas/veggie
 app.get("/pizzas/veggie", (req, res, next) => {
   console.log("request to /pizzas/veggie received");
   //res.send();
-  const dataVeggie = {
-    title: "Veggie Pizza",
-    price: 15,
-    recommendedDrink: "power smoothie",
-    imageFile: "pizza-veggie.jpg",
-    ingredients: ["cherry tomatoes", "basilicum", "Olives"],
-  };
-  res.render("product", dataVeggie);
+  Pizza.findOne({ title: "veggie" })
+    .then((pizzaDetailsFromDB) => {
+      res.render("product", pizzaDetailsFromDB);
+    })
+    .catch((err) => {
+      console.log("Cannot connect to DB", err);
+    });
 });
 //GET/pizzas/seafood
 app.get("/pizzas/seafood", (req, res, next) => {
   console.log("request to /pizzas/seafood received");
   //res.send();
-  const dataSeafood = {
-    title: "Seafood Pizza",
-    // price: 20,
-    recommendedDrink: "white wine",
-    imageFile: "pizza-seafood.jpg",
-    ingredients: ["tomato sauce", "garlic", "prawn"],
-  };
-  res.render("product", dataSeafood);
+  Pizza.findOne({ title: "seafood" })
+    .then((pizzaDetailsFromDB) => {
+      res.render("product", pizzaDetailsFromDB);
+    })
+    .catch((err) => {
+      console.log("Cannot connect to DB", err);
+    });
 });
 
 app.listen(3001, () => {

@@ -18,6 +18,7 @@ const pizzaSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  recommendedDrink: [String],
   dough: {
     type: String,
     enum: ["classic", "extra thin", "with cheese", "with galic"],
