@@ -43,14 +43,24 @@ app.get("/contact", (req, res, next) => {
 });
 
 //GET/pizzas
+// app.get("/pizzas", (req, res, next) => {
+//   console.log("request to /pizzas received");
+//   //res.send();
+//   res.send("page for pizzas");
+// });
+
 app.get("/pizzas", (req, res, next) => {
-  console.log("request to /pizzas received");
-  //res.send();
-  res.send("page for pizzas");
+  Pizza.find()
+    .then((pizzasArr) => {
+      res.render("product-list", { pizzasArr });
+    })
+    .catch((e) => {
+      console.log("Problem with DB Operation", e);
+    });
 });
 
 //GET/pizzas/margarita
-app.get("/pizzas/margarita", (req, res, next) => {
+/*app.get("/pizzas/margarita", (req, res, next) => {
   console.log("request to /pizzas/margarita received");
   //res.sendFile("path of the file");
   // res.send("page for margarita");
@@ -66,6 +76,7 @@ app.get("/pizzas/margarita", (req, res, next) => {
     ingredients: ["mozzarella", "tomato sauce", "basilicum"],
   };
   */
+/*
   Pizza.findOne({ title: "margarita" })
     .then((pizzaDetailsFromDB) => {
       res.render("product", pizzaDetailsFromDB);
@@ -98,6 +109,24 @@ app.get("/pizzas/seafood", (req, res, next) => {
       console.log("Cannot connect to DB", err);
     });
 });
+*/
+//
+//
+
+////// ROUTE PARAMS
+app.get("/pizzas/:pizzaName", (req, res, next) => {
+  Pizza.findOne({ title: req.params.pizzaName })
+    .then((pizzaDetailsFromDB) => {
+      res.render("product", pizzaDetailsFromDB);
+    })
+    .catch((e) => {
+      console.log("Problem with DB Operation", e);
+    });
+});
+
+//
+//
+//
 
 app.listen(3001, () => {
   console.log("server listens on http://localhost:3001/");

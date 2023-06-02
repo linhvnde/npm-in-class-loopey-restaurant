@@ -1,0 +1,27 @@
+<h1>List of pizzas in our DB:</h1>
+
+
+
+{{!-- ///this is ok but wrong approach in the code you need to put the pizzasArr in {}
+/*
+{{#each this}}
+*/ --}}
+{{#each pizzasArr}}
+<section class="pizza-summary">
+    {{!-- {{#if this.title}}
+        <h2>{{this.title}}</h2>
+        <h3>Price: {{this.price}}€</h3>
+        <hr>
+    {{else}}
+        <h2 hidden></h2>
+        <h3 hidden></h3>
+        <hr hidden>
+    {{/if}} --}}
+        <h2>{{this.title}}</h2>
+        <h3>Price: {{this.price}}€</h3>
+        
+        <hr>
+
+   
+</section>
+{{/each}}
